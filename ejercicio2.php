@@ -1,10 +1,8 @@
 <?php
-function sumar($numero1, $numero2) {
-    return $numero1 + $numero2;
-}
-$num1 = 67;
-$num2 = 88;
-$resultado = sumar($num1, $num2);
+declare(strict_types= 1);
 
-echo "La suma de " . $num1 . " y " . $num2 . " es: " . $resultado;
-?>
+function sumar ( int $a, int $b): void {
+    echo $a + $b;
+}
+
+sumar(331, 67); 
