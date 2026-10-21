@@ -1,5 +1,5 @@
 <?php
-function esPar($numero) {
+function verificarNumero($numero) {
     if ($numero % 2 == 0) {
         return "El número " . $numero . " es par.";
     } else {
@@ -9,5 +9,5 @@ function esPar($numero) {
 
 // Ejemplo de uso
 $numeroPrueba = 54;
-echo esPar($numeroPrueba);
+echo verificarNumero($numeroPrueba);
 ?>
