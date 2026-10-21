@@ -68,4 +68,23 @@ echo "Con stock: " . count($disponibles) . "\n";
 $precios = array_column($productos, 'precio');
 echo "El más caro cuesta " . formatearPrecio(max($precios)) . "\n";
 
+$productos = [
+    ["nombre" => "camisa casual", "precio" => 50000.0],
+    ["nombre" => "jeans slim fit", "precio" => 120000.0],
+    ["nombre" => "tenis deportivos", "precio" => 220000.0]
+];
+
+$tasaIva = 1.19;
+
+$productosConIva = array_map(function($producto) use ($tasaIva) {
+    return [
+        "nombre" => strtoupper($producto["nombre"]),
+        "precio_con_iva" => round($producto["precio"] * $tasaIva, 2)
+    ];
+}, $productos);
+
+foreach ($productosConIva as $item) {
+    echo "Producto: " . $item["nombre"] . " | Precio con IVA: $" . number_format($item["precio_con_iva"], 2) . "<br>";
+}
+
 ?>
