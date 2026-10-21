@@ -87,4 +87,30 @@ foreach ($productosConIva as $item) {
     echo "Producto: " . $item["nombre"] . " | Precio con IVA: $" . number_format($item["precio_con_iva"], 2) . "<br>";
 }
 
+class ProductoAgotadoException extends Exception {
+    public function __construct(string $producto) {
+        parent::__construct("No hay unidades suficientes de «$producto».");
+    }
+}
+
+function buscarProducto(array $productos, string $nombre): array {
+    foreach ($productos as $p) {
+        if ($p['nombre'] === $nombre) {
+            return $p;
+        }
+    }
+    throw new InvalidArgumentException("El producto «$nombre» no existe.");
+}
+
+function comprar(array $productos, string $nombre, int $cantidad): float {
+    if ($cantidad <= 0) {
+        throw new RangeException("La cantidad debe ser mayor que cero.");
+    }
+    $producto = buscarProducto($productos, $nombre);
+    if ($producto['stock'] < $cantidad) {
+        throw new ProductoAgotadoException($nombre);
+    }
+    return calcularIVA($producto['precio'] * $cantidad);
+}
+
 ?>
