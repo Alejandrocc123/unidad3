@@ -7,7 +7,6 @@ function verificarNumero($numero) {
     }
 }
 
-// Ejemplo de uso
 $numeroPrueba = 54;
 echo verificarNumero($numeroPrueba);
 ?>
