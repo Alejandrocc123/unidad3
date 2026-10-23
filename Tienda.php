@@ -53,9 +53,9 @@ $resultado = promedioPrecios(15.50, 29.99, 100.00, 4.25, 50.10);
 echo "El promedio de los precios es: " . $resultado;
 
 $productos = [
-    ['nombre' => 'Cuaderno', 'precio' => 8000,  'stock' => 20],
-    ['nombre' => 'Lápiz',    'precio' => 1500,  'stock' => 0],
-    ['nombre' => 'Mochila',  'precio' => 95000, 'stock' => 4],
+    ['nombre' => 'Cuaderno', 'precio' => 6000,  'stock' => 20],
+    ['nombre' => 'Lápiz',    'precio' => 2000,  'stock' => 0],
+    ['nombre' => 'Mochila',  'precio' => 100000, 'stock' => 4],
 ];
 
 $nombres = array_column($productos, 'nombre');
@@ -84,12 +84,12 @@ $productosConIva = array_map(function($producto) use ($tasaIva) {
 }, $productos);
 
 foreach ($productosConIva as $item) {
-    echo "Producto: " . $item["nombre"] . " | Precio con IVA: $" . number_format($item["precio_con_iva"], 2) . "<br>";
+    echo "Producto: " . $item["nombre"] . " | Precio con IVA: $" . number_format($item["precio_con_iva"], 2) . "\n";
 }
 
 class ProductoAgotadoException extends Exception {
     public function __construct(string $producto) {
-        parent::__construct("No hay unidades suficientes de «$producto».");
+        parent::__construct("No hay unidades suficientes de «{$producto}».");
     }
 }
 
@@ -99,7 +99,7 @@ function buscarProducto(array $productos, string $nombre): array {
             return $p;
         }
     }
-    throw new InvalidArgumentException("El producto «$nombre» no existe.");
+    throw new InvalidArgumentException("El producto «{$nombre}» no existe.");
 }
 
 function comprar(array $productos, string $nombre, int $cantidad): float {
